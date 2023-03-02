@@ -21,3 +21,33 @@ router.get('/notes', async (req, res) => {
         res.status(500).json('Error updating db.json');
     }
 });
+
+// Post route to add a note
+router.post('/notes', async (req, res) => {
+    const { title, text } = req.body;
+
+    if (title && text) {
+        const newNote = {
+            title,
+            text,
+            id: uuidv4(),
+        };
+
+        try {
+            const data = await fs.readFile(dbFile, 'utf8');
+            const notes = JSON.parse(data);
+            notes.push(newNote);
+            await fs.writeFile(dbFile, JSON.stringify(notes, null, 4));
+            const response = {
+                status: 'success',
+                body: newNote
+            };
+            res.json(response);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json('Error updating db.json');
+        }
+    } else {
+        res.json('Error in adding new note.');
+    }
+});
