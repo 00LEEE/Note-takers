@@ -3,7 +3,7 @@ const router = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 const dbFile = '../Develop/db/db.json';
 
-// Get route on /api/notes that gets all the notes
+// Get route that grabs all the notes
 router.get('/notes', async (req, res) => {
     try {
         const data = await fs.readFile(dbFile, 'utf8');
@@ -22,7 +22,7 @@ router.get('/notes', async (req, res) => {
     }
 });
 
-// Post route to add a note
+// Post route add a note
 router.post('/notes', async (req, res) => {
     const { title, text } = req.body;
 
@@ -52,7 +52,7 @@ router.post('/notes', async (req, res) => {
     }
 });
 
-// Delete route on /api/notes that'll be a param route that uses the id
+// Delete route that'll be a param route that uses the id
 router.delete('/notes/:id', async (req, res) => {
     const Id = req.params.id;
     try {
