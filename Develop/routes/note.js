@@ -51,3 +51,20 @@ router.post('/notes', async (req, res) => {
         res.json('Error in adding new note.');
     }
 });
+
+// Delete route on /api/notes that'll be a param route that uses the id
+router.delete('/notes/:id', async (req, res) => {
+    const Id = req.params.id;
+    try {
+        const data = await fs.readFile(dbFile, 'utf8');
+        const notes = JSON.parse(data);
+        const result = notes.filter((note) => note.id !== Id);
+        await fs.writeFile(dbFile, JSON.stringify(result, null, 4));
+        res.json(`Note with id:${Id} has been deleted 🗑️!`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json('Error updating db.json');
+    }
+});
+
+module.exports = router;
