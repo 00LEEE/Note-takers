@@ -53,7 +53,7 @@ router.post('/notes', async (req, res) => {
     }
 });
 
-// Delete route that'll be a param route that uses the id
+// Delete route that'll be a param route
 router.delete('/notes/:id', async (req, res) => {
     const Id = req.params.id;
     try {
