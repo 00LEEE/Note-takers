@@ -2,7 +2,7 @@ const fs = require('fs').promises;
 const router = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 const dbFile = '../db/db.json';
-const { readAndAppend, writeToFile, readFromFile } = require('../db/help/fsUtils');
+const { readAndAppend, writeToFile, readFromFile } = require('../help/fsUtils');
 
 // Get route that grabs all the notes
 router.get('/notes', async (req, res) => {
