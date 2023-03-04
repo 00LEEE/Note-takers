@@ -81,7 +81,7 @@ router.post('/notes', async (req, res) => {
     } else {
       res.json('Error in adding new note.');
     }
-  });
+});
   
 
 // Delete route that'll be a param route
