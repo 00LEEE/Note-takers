@@ -53,6 +53,37 @@ router.post('/notes', async (req, res) => {
     }
 });
 
+//Reads data from a file and appends new data to it.
+router.post('/notes', async (req, res) => {
+    const { title, text } = req.body;
+  
+    if (title && text) {
+      const newNote = {
+        title,
+        text,
+        id: uuidv4(),
+      };
+  
+      try {
+        const data = await readFromFile(dbFile);
+        const notes = JSON.parse(data);
+        notes.push(newNote);
+        await writeToFile(dbFile, notes);
+        const response = {
+          status: 'success',
+          body: newNote,
+        };
+        res.json(response);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json('Error updating db.json');
+      }
+    } else {
+      res.json('Error in adding new note.');
+    }
+  });
+  
+
 // Delete route that'll be a param route
 router.delete('/notes/:id', async (req, res) => {
     const Id = req.params.id;
