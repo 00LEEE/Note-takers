@@ -21,3 +21,16 @@ const readAndAppend = async (content, file) => {
 };
 
 module.exports = { fs, writeToFile, readAndAppend };
+
+const fs = require('fs').promises;
+
+async function writeToFile(file, data) {
+  try {
+    await fs.writeFile(file, JSON.stringify(data, null, 4));
+    console.log(`Data successfully written to ${file}`);
+  } catch (error) {
+    console.error(`Error writing to ${file}: ${error}`);
+  }
+}
+
+module.exports = { writeToFile };
