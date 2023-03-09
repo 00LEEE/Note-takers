@@ -15,7 +15,7 @@ Random password generator including different variation preferences such as capi
 
 ![Alt text](https://i.imgur.com/l1gWmVC.png)
 
-Deployed website on Heroku
+Deployed website on Heroku: https://note-takerss.herokuapp.com/
 
 # Licensed
 - This project is Licensed under the MIT License.
